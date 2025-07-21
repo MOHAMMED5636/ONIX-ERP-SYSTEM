@@ -1,30 +1,14 @@
-import React, { useState } from "react";
-import Navbar from "./Navbar";
-import Sidebar from "./Sidebar";
+import React from "react";
+// import Sidebar from "./Sidebar"; // Remove Sidebar import
 
-export default function DashboardLayout({ lang, dir, onLangToggle, children }) {
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(window.innerWidth < 768);
-
-  // Responsive sidebar collapse on window resize
-  React.useEffect(() => {
-    const handleResize = () => {
-      setSidebarCollapsed(window.innerWidth < 768);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
+export default function DashboardLayout({ children }) {
+  // Remove sidebar state and logic
   return (
-    <div className="min-h-screen flex flex-col" dir={dir}>
-      <Navbar lang={lang} dir={dir} onLangToggle={onLangToggle} />
-      <div className="flex flex-1">
-        <Sidebar
-          collapsed={sidebarCollapsed}
-          onToggle={() => setSidebarCollapsed((c) => !c)}
-          lang={lang}
-          dir={dir}
-        />
-        <main className={`flex-1 p-2 md:p-6 transition-all duration-300 ${sidebarCollapsed ? 'ml-16' : 'ml-48'} ${dir === 'rtl' ? (sidebarCollapsed ? 'mr-16' : 'mr-48') : ''}`}>
+    <div className="min-h-screen flex flex-col">
+      <div className="flex flex-1 relative">
+        {/* Remove Sidebar rendering here */}
+        {/* Main content: margin-left on md+, full width on mobile */}
+        <main className="flex-1 w-full px-2 md:px-6 transition-all duration-300 md:ml-16 lg:ml-20 xl:ml-64">
           {children}
         </main>
       </div>
